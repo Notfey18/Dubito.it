@@ -251,6 +251,15 @@ export class Marketplace {
   ) {
     const authFound = this.getUserByToken(token);
     if (!!authFound) {
+      const userFound = this.users.find(function (user) {
+        if (user.primaryKey === authFound.referenceKeyUser) return true;
+        else return false;
+      });
+      if (!userFound) console.log("User not found");
+      else {
+        userFound.username = newUsername;
+        this.user = [...this.user, newUsername];
+      }
     }
   }
 
@@ -401,8 +410,6 @@ export class Marketplace {
         const newReport = new ModelReport(
           referenceKeyAd,
           auth.referenceKeyUser,
-          state,
-          primaryKey,
           title,
           description
         );
@@ -496,33 +503,43 @@ export class Marketplace {
 }
 
 const apis = {
-  getUserBytoken: new DocAPI("/API/auth", "GET", true),
-  login: new DocAPI("/API/auth/login", "POST", true),
-  logout: new DocAPI("/API/auth/logout", "POST", true),
-  register: new DocAPI("/API/user/signup", "POST", true),
-  deleteUser: new DocAPI("API/user/delete", "DELETE", true),
-  updateUsername: new DocAPI("API/user/update", "PUT", true),
-  createAd: new DocAPI("/API/ads/create", "PUT", true),
-  updateAd: new DocAPI("/API/ads/update", "PUT", true),
-  deleteAd: new DocAPI("/API/ads/delete", "DELETE", true),
-  listByCategory: new DocAPI("/API/ads/category", "GET", true),
-  listUserFavorites: new DocAPI("/API/favorites", "GET", true),
-  listUserAds: new DocAPI("/API/user/ads", "GET", true),
-  listUserReviews: new DocAPI("/API/user/reviews", "GET", true),
-  createReview: new DocAPI("/API/reviews/create", "PUT", true),
-  updateReview: new DocAPI("/API/reviews/update", "PUT", true),
-  deleteReview: new DocAPI("/API/reviews/delete", "DELETE", true),
-  updateAdAsSold: new DocAPI("/API/ads/sold", "PUT", true),
-  filterAd: new DocAPI("/API/ads/filter", "POST", true),
-  addFavoriteList: new DocAPI("/API/favorites/add", "PUT", true),
-  deleteFavoriteList: new DocAPI("/API/favorites/delete", "PUT", true),
-  registerDevice: new DocAPI("/API/device/register", "POST", true),
-  changeDeviceName: new DocAPI("/API/device/update", "PUT", true),
-  deleteDevice: new DocAPI("/API/device/delete", "DELETE", true),
-  createReport: new DocAPI("/API/reports/create", "PUT", true),
-  closeReport: new DocAPI("/API/reports/delete", "DELETE", true),
-  listBycategory: new DocAPI("/API/ads/category", "GET", true),
-  showDetails: new DocAPI("/API/ads/details", "GET", true),
-  listUserSoldAds: new DocAPI("/API/user/soldads", "GET", true),
-  listUserBuyedAds: new DocAPI("/API/user/buyedads", "GET", true),
+  login: new DocAPI("auth/login", "POST", true),
+  logout: new DocAPI("auth/logout", "POST", true),
+  register: new DocAPI("auth/register", "POST", true),
+  deleteUser: new DocAPI("user/{referenceKeyUser}", "DELETE", true),
+  updateUsername: new DocAPI("user/{referenceKeyUser}", "PUT", true),
+  createAd: new DocAPI("ads", "PUT", true),
+  updateAd: new DocAPI("ads/{referenceKeyAd}/", "PUT", true),
+  deleteAd: new DocAPI("ads/{referenceKeyAd}", "DELETE", true),
+  listByCategory: new DocAPI("ads/category", "GET", true),
+  listUserFavorites: new DocAPI("favorites/list", "GET", true),
+  listUserAds: new DocAPI("user/{referenceKeyAd}/ads", "GET", true),
+  listUserReviews: new DocAPI("user/{referenceKeyReview}/reviews", "GET", true),
+  createReview: new DocAPI("reviews", "PUT", true),
+  updateReview: new DocAPI("reviews/update", "PUT", true),
+  deleteReview: new DocAPI("reviews/{referenceKeyAd}", "DELETE", true),
+  updateAdAsSold: new DocAPI("ads/{referenceKeyAd}", "PATCH", true),
+  filterAd: new DocAPI("ads/filter", "POST", true),
+  addFavoriteList: new DocAPI("favorites", "PUT", true),
+  deleteFavoriteList: new DocAPI(
+    "favorites/{referenceKeyFavorite}/delete",
+    "PUT",
+    true
+  ),
+  registerDevice: new DocAPI("device/", "POST", true),
+  changeDeviceName: new DocAPI("device/update", "PUT", true),
+  deleteDevice: new DocAPI("device/{referenceKeyDevice}", "DELETE", true),
+  createReport: new DocAPI("reports/{referenceKeyUser}", "PUT", true),
+  closeReport: new DocAPI("reports/{referenceKeyReport}", "DELETE", true),
+  showDetails: new DocAPI("ads/{referenceKeyAd}", "GET", true),
+  listUserSoldAds: new DocAPI(
+    "user/{referenceKeyUser}/ads{referenceKeyAd}",
+    "GET",
+    true
+  ),
+  listUserBuyedAds: new DocAPI(
+    "user/{referenceKeyUser}/{referenceKeyUserPurchased}",
+    "GET",
+    true
+  ),
 };
