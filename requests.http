@@ -1,0 +1,49 @@
+### registration
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+    "email":"alessio@gmail.com",
+    "username":"user123",
+    "password":"1234"
+}
+
+### userlist
+GET  http://localhost:3000/api/users
+Content-Type: application/json
+
+### login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email":"alessio@gmail.com",
+    "password":"1234"
+}
+
+### logout
+POST http://localhost:3000/api/auth/logout
+Content-Type: application/json
+{
+    "referenceKeyUser":"",
+    "token":""
+}
+
+### create Ad
+POST http://localhost:3000/api//ads/create
+Content-Type: application/json
+{
+    "title":"sgabello",
+    "status":true,
+    "photo":"UrlPhoto",
+    "description":"sgabello bello",
+    "category":"mobili",
+    "price": "un nichelino",
+    "address":"via silvio berlusconi",
+    "phone":"329853472",
+    "token":"",
+    "referenceKeyUserP":"",
+    "referenceKeyUserPurchased":""
+}
+
+###
