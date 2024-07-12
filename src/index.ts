@@ -70,7 +70,7 @@ app.post("/api/auth/login", function (req: Request, res: Response) {
 // Logout
 app.delete("/api/auth/logout", function (req: Request, res: Response) {
   const token = req.headers.authorization;
-  if (!token) return res.status(400).json({ message: "Missing idDevice" });
+  if (!token) return res.status(400).json({ message: "Missing token" });
   const success = myApp.logout(token);
   if (success) return res.status(200).json({ message: "logout success" });
   else return res.status(400).json({ message: "Error logout" });

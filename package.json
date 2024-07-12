@@ -2,7 +2,8 @@
   "scripts": {
     "build": "tsc --noEmit && tsc --outDir build",
     "dev": "npm run build && node build/index.js",
-    "start": "nodemon"
+    "start": "nodemon",
+    "serve": "node dist/index.js"
   },
   "dependencies": {
     "express": "^4.19.2",
