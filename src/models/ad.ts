@@ -26,7 +26,7 @@ export class ModelAd {
     referenceKeyUser: ModelUser["primaryKey"],
     referenceKeyUserPurchased: ModelUser["primaryKey"]
   ) {
-    this.primaryKey = Math.random().toString();
+    this.primaryKey = Math.random().toString(16).slice(2);
     this.title = title;
     this.status = status;
     this.urlPhoto = urlPhoto;

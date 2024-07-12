@@ -1,5 +1,4 @@
-import { ParamsRegister } from "../declaration";
-import { DocAPI } from "./models/DocAPI";
+import { ParamsLogin, ParamsRegister } from "./declaration";
 import { ModelAd } from "./models/ad";
 import { ModelAuth } from "./models/auth";
 import { ModelDevice } from "./models/device";
@@ -28,22 +27,31 @@ export class Marketplace {
     else return authsFound;
   }
 
-  login(email: ModelUser["email"], password: ModelUser["password"]) {
-    const userFound = this.users.find(function (user) {
-      return user.email === email && user.password === password;
-    });
-    if (!!userFound) {
-      const auth = new ModelAuth(userFound.primaryKey);
-      this.auths = [...this.auths, auth];
-      return auth.token;
-    } else return false;
+  authList() {
+    return this.auths;
   }
 
-  logout(referenceKeyUser: ModelAuth["primaryKey"], token: ModelAuth["token"]) {
+  login({ password, email }: ParamsLogin) {
+    const userFound = this.users.find(
+      (user) => user.email === email && user.password === password
+    );
+
+    if (userFound) {
+      const auth = new ModelAuth(userFound.primaryKey);
+      this.auths = [...this.auths, auth];
+      console.log("Welcome");
+      return auth.token;
+    }
+
+    // Se l'utente non è trovato
+    console.log("User not found");
+    return null; // Restituire null se l'utente non è trovato
+  }
+  logout(token: ModelAuth["token"]) {
     const auth = this.getUserByToken(token);
     if (!!auth) {
-      const userFound = this.auths.find(function (user) {
-        if (auth.referenceKeyUser === referenceKeyUser) return true;
+      const userFound = this.auths.find(function (auth) {
+        if (auth.token === token) return true;
         else return false;
       });
       if (!userFound) console.log("User not found");
@@ -66,7 +74,11 @@ export class Marketplace {
     });
     if (!!findUser) return false;
     else {
-      const newUser = new ModelUser(username, email, password);
+      const newUser = new ModelUser({
+        username,
+        email,
+        password,
+      });
       this.users = [...this.users, newUser];
       return true;
     }
@@ -187,6 +199,7 @@ export class Marketplace {
     description: ModelReview["description"],
     rating: ModelReview["rating"],
     referenceKeyAd: ModelReview["referenceKeyAd"],
+    referenceKeyUser: ModelReview["referenceKeyUser"],
     token: ModelAuth["token"]
   ) {
     const authFound = this.getUserByToken(token);

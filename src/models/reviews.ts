@@ -22,7 +22,7 @@ export class ModelReview {
   ) {
     this.title = title;
     this.description = description;
-    this.primaryKey = Math.random().toString();
+    this.primaryKey = Math.random().toString(16).slice(2);
     this.referenceKeyAd = referenceKeyAd;
     this.referenceKeyUser = referenceKeyUser;
     this.rating = rating;

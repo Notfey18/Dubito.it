@@ -5,8 +5,8 @@ export class ModelAuth {
   primaryKey: string;
   referenceKeyUser: ModelUser["primaryKey"];
   constructor(referenceKeyUser: string) {
-    this.primaryKey = Math.random().toString();
+    this.primaryKey = Math.random().toString(16).slice(2);
     this.referenceKeyUser = referenceKeyUser;
-    this.token = Math.random().toString();
+    this.token = Math.random().toString(16).slice(2);
   }
 }
