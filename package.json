@@ -3,7 +3,7 @@
     "build": "tsc --noEmit && tsc --outDir build",
     "dev": "npm run build && node build/index.js",
     "start": "nodemon",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.ts"
   },
   "dependencies": {
     "express": "^4.19.2",

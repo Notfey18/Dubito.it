@@ -293,22 +293,20 @@ export class Marketplace {
     } else console.log("Token not valid");
   }
 
-  updateUsername(
-    newUsername: ModelUser["username"],
-    token: ModelAuth["token"]
-  ) {
-    const authFound = this.getUserByToken(token);
-    if (!!authFound) {
+  updateUsername(token: ModelAuth["token"], username: ModelUser["username"]) {
+    const auth = this.getUserByToken(token);
+    if (!!auth) {
       const userFound = this.users.find(function (user) {
-        if (user.primaryKey === authFound.referenceKeyUser) return true;
+        if (user.primaryKey === auth.referenceKeyUser) return true;
         else return false;
       });
-      if (!userFound) console.log("User not found");
+      if (!userFound) console.log("Account not found");
       else {
-        userFound.username = newUsername;
-        this.user = [...this.user, newUsername];
+        userFound.username = username;
+        console.log("Account updated successfully :)");
+        return true;
       }
-    }
+    } else console.log("Token not valid");
   }
 
   updateAdAsSold(

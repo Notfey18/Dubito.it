@@ -24,13 +24,14 @@ Content-Type: application/json
 ### logout
 DELETE  http://localhost:3000/api/auth/logout
 Content-Type: application/json
-Authorization: 196ccd126b4bf
+Authorization: 734e0aa7a6a3f
 
 
 ### user Update
-GET http://localhost:3000/api/user/update
+PUT http://localhost:3000/api/user/update
 Content-Type: application/json
-Authorization: 196ccd126b4bf
+Authorization: 31e52028e54f
+
 {
     "newUsername":"banana"
 }
@@ -39,18 +40,21 @@ Authorization: 196ccd126b4bf
 GET http://localhost:3000/api/api/users
 Content-Type: application/json
 
+
 ### user Delete
 DELETE  http://localhost:3000/api/user/delete
 Content-Type: application/json  
-Authorization: 
+Authorization: 31e52028e54f
+
 {
-    "primayKey":"0.3763498903456566"
+    "primayKey":""
 }
 
 ### create Ad
-POST http://localhost:3000/api//ads/create
+POST http://localhost:3000/api/ads/create
 Content-Type: application/json
-Authorization: e36647269a6a2
+Authorization: 31e52028e54f
+
 {
     "title":"sgabello",
     "status":true,
@@ -60,13 +64,14 @@ Authorization: e36647269a6a2
     "price": "un nichelino",
     "address":"via silvio berlusconi",
     "phone":"329853472",
-    "referenceKeyUser":"9c68b8a845508",
+    "referenceKeyUser":"f9451c69ed856",
     "referenceKeyUserPurchased":""
 }
 
 ### update Ad
 POST http://localhost:3000/api/ads/update
 Content-Type: application/json
+
 {
  "title":,
     "status":,
@@ -84,9 +89,10 @@ Content-Type: application/json
 ### delete Ad
 DELETE http://localhost:3000/api/ads/delete 
 Content-Type: application/json
+Authorization: 31e52028e54f
+
 {
-    "token":,
-    "referenceKeyAds":,
+    "referenceKeyAds":"",
 }
 
 ### ad List
@@ -96,8 +102,9 @@ Content-Type: application/json
 ### update Ad Status
 PUT http://localhost:3000/api/ads/status
 Content-Type: application/json
+Authorization: 
+
 {
-    "token":,
     "referenceKeyAds":,
     "status":,
 }
@@ -105,4 +112,14 @@ Content-Type: application/json
 ### create Review
 POST http://localhost:3000/api/reviews/create
 Content-Type: application/json
-{}
+Authorization: 
+
+{
+    "title":"",
+    "description":,
+    "rating":,
+    "referenceKeyAd":,
+    "referenceKeyUser":
+}
+
+### update Review

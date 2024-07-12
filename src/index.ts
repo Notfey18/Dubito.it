@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 import { Marketplace } from "./app";
 import swaggerJsDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import { log } from "console";
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -91,10 +92,11 @@ app.put("/api/user/update", function (req: Request, res: Response) {
   console.log(req);
   const token = req.headers.authorization;
   const newUsername = req.body.username;
+  console.log(token);
   if (!newUsername)
     return res.status(400).json({ message: "Username is required" });
   if (!token) return res.status(400).json({ message: "Token is required" });
-  const userUpdated = myApp.updateUser(newUsername, token);
+  const userUpdated = myApp.updateUsername(newUsername, token);
   if (userUpdated) return res.status(200).json({ message: "User updated" });
   else return res.status(400).json({ message: "User not found" });
 });
@@ -149,7 +151,10 @@ app.post("/api/ads/create", function (req: Request, res: Response) {
     referenceKeyUser,
     referenceKeyUserPurchased
   );
-  if (hasAdCreated) return res.status(200).json({ message: "Ad created" });
+  if (hasAdCreated)
+    return res
+      .status(200)
+      .json({ message: "Ad created", primaryKey: ad.primaryKey });
   else return res.status(400).json({ message: "Comlipe all params" });
 });
 
