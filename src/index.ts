@@ -155,7 +155,7 @@ app.post("/api/ads/create", function (req: Request, res: Response) {
     return res
       .status(200)
       .json({ message: "Ad created", primaryKey: ad.primaryKey });
-  else return res.status(400).json({ message: "Comlipe all params" });
+  else return res.status(400).json({ message: "Compile all params" });
 });
 
 //Update Ad
@@ -186,7 +186,7 @@ app.post("/api/ads/update", function (req: Request, res: Response) {
     token
   );
   if (hasAdUpdated) return res.status(200).json({ message: "A updated" });
-  else return res.status(400).json({ message: "Comlipe all params" });
+  else return res.status(400).json({ message: "Compile all params" });
 });
 
 //Delete Ad
@@ -217,7 +217,7 @@ app.put("/api/ads/status", function (req: Request, res: Response) {
 
 // Creatre Review
 app.post("/api/reviews/create", function (req: Request, res: Response) {
-  const token = req.body.auth;
+  const token = req.headers.authorization;
   const title = req.body.title;
   const description = req.body.description;
   const rating = req.body.rating;
@@ -235,7 +235,7 @@ app.post("/api/reviews/create", function (req: Request, res: Response) {
 
   if (hasReviewCreated)
     return res.status(200).json({ message: "Review created" });
-  else return res.status(400).json({ message: "Comlipe all params" });
+  else return res.status(400).json({ message: "Compile all params" });
 });
 
 // Update Review

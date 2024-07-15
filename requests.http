@@ -24,7 +24,7 @@ Content-Type: application/json
 ### logout
 DELETE  http://localhost:3000/api/auth/logout
 Content-Type: application/json
-Authorization: 734e0aa7a6a3f
+Authorization: 
 
 
 ### user Update
@@ -37,14 +37,14 @@ Authorization: 31e52028e54f
 }
 
 ### auth List
-GET http://localhost:3000/api/api/users
+GET http://localhost:3000/api/auths
 Content-Type: application/json
 
 
 ### user Delete
 DELETE  http://localhost:3000/api/user/delete
 Content-Type: application/json  
-Authorization: 31e52028e54f
+Authorization:
 
 {
     "primayKey":""
@@ -53,7 +53,7 @@ Authorization: 31e52028e54f
 ### create Ad
 POST http://localhost:3000/api/ads/create
 Content-Type: application/json
-Authorization: 31e52028e54f
+Authorization: 69886dcc4960c
 
 {
     "title":"sgabello",
@@ -71,6 +71,7 @@ Authorization: 31e52028e54f
 ### update Ad
 POST http://localhost:3000/api/ads/update
 Content-Type: application/json
+Authorization: 69886dcc4960c
 
 {
  "title":,
@@ -82,17 +83,16 @@ Content-Type: application/json
     "address":,
     "phone":,
     "referenceKeyUser":,
-    "referenceKeyUserPurchased":,
-    "token":   
+    "referenceKeyUserPurchased":   
 }
 
 ### delete Ad
 DELETE http://localhost:3000/api/ads/delete 
 Content-Type: application/json
-Authorization: 31e52028e54f
+Authorization: 69886dcc4960c
 
 {
-    "referenceKeyAds":"",
+    "referenceKeyAds":"354479f6a1a13"
 }
 
 ### ad List
@@ -106,20 +106,69 @@ Authorization:
 
 {
     "referenceKeyAds":,
-    "status":,
+    "status":
 }
 
 ### create Review
 POST http://localhost:3000/api/reviews/create
 Content-Type: application/json
-Authorization: 
+Authorization: 6667858e8b779
 
 {
-    "title":"",
-    "description":,
-    "rating":,
-    "referenceKeyAd":,
-    "referenceKeyUser":
+    "title":"ok",
+    "description":"molto bello",
+    "rating":"4",
+    "referenceKeyAd":"a2be01fce4775",
+    "referenceKeyUser":"283039e3b7f28"
 }
 
 ### update Review
+POST http://localhost:3000/api/reviews/update
+Content-Type: application/json
+Authorization: 
+
+{
+  "title":"ok",
+    "description":"molto bello",
+    "rating":"4",
+    "referenceKeyAd":"a2be01fce4775",
+    "referenceKeyUser":"283039e3b7f28"   
+}
+
+### delete Review
+DELETE http://localhost:3000/api/reviews/delete
+Content-Type: application/json
+Authorization: 
+
+{
+    "referenceKeyReview":"",
+    "referenceKeyUser":"" 
+}
+
+### review List
+GET  http://localhost:3000/api/reviews
+Content-Type: application/json
+
+### add Favorite
+POST http://localhost:3000/api/favorites/create
+Content-Type: application/json
+Authorization: 
+
+{
+    "referenceKeyAd":"",
+    "referenceKeyUser":""
+}
+
+### delete Favorite
+DELETE http://localhost:3000/api/favorites/delete
+Content-Type: application/json
+Authorization: 
+
+{
+   "referenceKeyAd":"",
+    "referenceKeyUser":"" 
+}
+
+### favourite List
+Get http://localhost:3000/api/favorites
+Content-Type: application/json
